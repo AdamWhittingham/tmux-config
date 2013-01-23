@@ -12,30 +12,29 @@ Key bindings
 ``Ctrl+a`` Command prefix (<prefix> from here on)
 
 ### Mutliplexing
-``<prefix> c`` Create window
-``<prefix> s`` Split into horizontal panes
-``<prefix> S`` Split into vertical panes
+* ``<prefix> c`` Create window
+* ``<prefix> s`` Split into horizontal panes
+* ``<prefix> S`` Split into vertical panes
 
 ### Movement
-``<prefix> n`` next window
-``<prefix> b`` back a window
-``<prefix> 1-9`` go to window #1-9
-``<prefix> -`` previously selected window
+* ``<prefix> n`` next window
+* ``<prefix> b`` back a window
+* ``<prefix> 1-9`` go to window #1-9
+* ``<prefix> -`` previously selected window
 
-``<prefix> h`` move to the pane left
-``<prefix> j`` move to the pane down
-``<prefix> k`` move to the pane up
-``<prefix> l`` move to the pane right
+* ``<prefix> h`` move to the pane left
+* ``<prefix> j`` move to the pane down
+* ``<prefix> k`` move to the pane up
+* ``<prefix> l`` move to the pane right
 
 ### Resizing Panes
 *These can be repeated with a single press of the prefix to resize quickly*
-
-``<prefix> H`` resize to the pane left
-``<prefix> J`` resize to the pane down
-``<prefix> K`` resize to the pane up
-``<prefix> L`` resize to the pane right
+* ``<prefix> H`` resize to the pane left
+* ``<prefix> J`` resize to the pane down
+* ``<prefix> K`` resize to the pane up
+* ``<prefix> L`` resize to the pane right
 
 
 ### Misc
-``<prefix><prefix>`` send the prefix through tmux to the terminal or app inside
-``Shift + Left Click`` highlight text for copying
+* ``<prefix><prefix>`` send the prefix through tmux to the terminal or app inside
+* ``Shift + Left Click`` highlight text for copying
