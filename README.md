@@ -41,3 +41,4 @@ Key bindings
 ### Misc
 * ``<prefix><prefix>`` send the prefix through tmux to the terminal or app inside
 * ``Shift + Left Click`` highlight text for copying
+* ``<prefix> R`` reload the ~/.tmux.conf config file
