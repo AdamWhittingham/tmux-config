@@ -14,7 +14,7 @@ function grab_wan_ip {
 }
 
 function wan_ip {
-  if [[ -f $wan_tmp ]]; then 
+  if [[ -f $wan_tmp ]]; then
     wan_file_written=$(date +%s -r $wan_tmp)
     now=$(date +%s)
     wan_file_age=$((now-wan_file_written))
@@ -27,11 +27,11 @@ function wan_ip {
   cat $wan_tmp
 }
 
-if [[ -f "$tick_file" ]]; then
-  rm "$tick_file"
-  echo "ⓦ $(wan_ip)"
+if [[ -f "$tick_file" ]] && [[ $(cat $tick_file) == 0 ]]; then
+  echo "1" > "$tick_file"
+  printf "%-18s" "ⓦ $(wan_ip)"
 else
-  touch $tick_file
-	echo "ⓛ $(lan_ip)"
+  echo "0" > "$tick_file"
+  printf "%-18s" "ⓛ $(lan_ip)"
 fi
 
