@@ -27,11 +27,11 @@ function wan_ip {
   cat $wan_tmp
 }
 
-if [[ -f "$tick_file" ]] && [[ $(cat $tick_file) == 0 ]]; then
-  echo "1" > "$tick_file"
+if [[ -f "$tick_file" ]] && [[ $(cat $tick_file) > 0 ]]; then
+  echo "0" > "$tick_file"
   printf "%-18s" "ⓦ $(wan_ip)"
 else
-  echo "0" > "$tick_file"
+  echo "1" > "$tick_file"
   printf "%-18s" "ⓛ $(lan_ip)"
 fi
 
