@@ -5,7 +5,7 @@ update_time=900 # Time in seconds to cache the wan ip for
 tick_file="/tmp/tmux_ip_tick"
 
 function lan_ip {
-  echo "$(/sbin/ifconfig 2>/dev/null | grep 'inet '|grep -v '127.0.0.1'| awk '{print $2}'|cut -d':' -f2)"
+  echo "$(/sbin/ifconfig 2>/dev/null | grep 'inet '|grep -v '127.0.0.1'| awk '{print $2}'|cut -d':' -f2|head -1)"
 }
 
 function grab_wan_ip {
@@ -27,11 +27,14 @@ function wan_ip {
   cat $wan_tmp
 }
 
+function print_ip {
+  printf "%-17s" "$1"
+}
+
 if [[ -f "$tick_file" ]] && [[ $(cat $tick_file) > 0 ]]; then
   echo "0" > "$tick_file"
-  printf "%-18s" "ⓦ $(wan_ip)"
+  print_ip "ⓦ $(wan_ip)"
 else
   echo "1" > "$tick_file"
-  printf "%-18s" "ⓛ $(lan_ip)"
+  print_ip "ⓛ $(lan_ip)"
 fi
-
