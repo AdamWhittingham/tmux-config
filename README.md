@@ -20,16 +20,23 @@ Key bindings
 * ``<prefix> S`` Split into vertical panes
 
 ### Window Movement
-* ``<prefix> n`` next window
-* ``<prefix> b`` back a window
-* ``<prefix> 1-9`` go to window #1-9
+* ``<prefix> ,`` switch to back window
+* ``<prefix> .`` switch to next window
 * ``<prefix> -`` previously selected window
+* ``<prefix> 1-9`` go to window #1-9
+* ``<prefix> w`` list windows and select which to switch to
+
+### Window Control
+* ``<prefix> <`` move window left
+* ``<prefix> >`` move window right
+* ``<prefix> r`` rename window
 
 ### Pane Movement
 * ``<prefix> h`` move to the pane left
 * ``<prefix> j`` move to the pane down
 * ``<prefix> k`` move to the pane up
 * ``<prefix> l`` move to the pane right
+* ``<prefix> q n`` Show pane numbers, then jump to pane n
 
 ### Pane Resizing
 *These can be repeated with a single press of the prefix to resize quickly*
@@ -38,7 +45,13 @@ Key bindings
 * ``<prefix> K`` resize to the pane up
 * ``<prefix> L`` resize to the pane right
 
+### Session Control
+* ``<prefix> d`` detach from session
+* ``tmux attach -t <session-name>`` reattach to session
+* ``tmux ls`` list sessions
+
 ### Misc
+* ``<prefix> x`` close pane
 * ``<prefix><prefix>`` send the prefix through tmux to the terminal or app inside
 * ``Shift + Left Click`` highlight text for copying
 * ``<prefix> R`` reload the ~/.tmux.conf config file
