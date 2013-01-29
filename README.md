@@ -50,6 +50,17 @@ Key bindings
 * ``tmux attach -t <session-name>`` reattach to session
 * ``tmux ls`` list sessions
 
+### Copy & Paste
+* ``<prefix> ESC`` enter copy mode
+In copy mode you can then use vi selection bindings (w,e,t,etc)
+* ``v`` to visually select
+* ``y`` to yank to a buffer
+* ``<prefix> p`` paste
+* ``<prefix> P`` pick what to paste when there are multiple things copied
+##### System clipboard copy & paste (requires xclip)
+* ``<prefix> Ctrl+c`` Copy buffer to clipboard
+* ``<prefix> Ctrl+v`` Paste from clipboard
+
 ### Misc
 * ``<prefix> x`` close pane
 * ``<prefix><prefix>`` send the prefix through tmux to the terminal or app inside
