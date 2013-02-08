@@ -12,10 +12,11 @@ If you are looking for an example script for firing up tmux as a ruby dev enviro
 
 Key bindings
 ------------
-``Ctrl+a`` Command prefix (<prefix> from here on)
+``Ctrl+a`` Command prefix (``<prefix>`` from here on)
 
 ### Mutliplexing
-* ``<prefix> c`` Create window
+* ``<prefix> c`` Create new window
+* ``<prefix> n`` Create new window
 * ``<prefix> s`` Split into horizontal panes
 * ``<prefix> S`` Split into vertical panes
 
@@ -39,7 +40,7 @@ Key bindings
 * ``<prefix> q n`` Show pane numbers, then jump to pane n
 
 ### Pane Resizing
-*These can be repeated with a single press of the prefix to resize quickly*
+*These can be repeated after a single press of the prefix to resize quickly*
 * ``<prefix> H`` resize to the pane left
 * ``<prefix> J`` resize to the pane down
 * ``<prefix> K`` resize to the pane up
