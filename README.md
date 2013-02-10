@@ -51,6 +51,8 @@ Key bindings
 * ``<prefix> d`` detach from session
 * ``tmux attach -t <session-name>`` reattach to session
 * ``tmux ls`` list sessions
+* ``<prefix> q`` Kill the pane
+* ``<prefix> Ctrl+q`` Kill the whole session- use with care!
 
 ### Copy & Paste
 * ``<prefix> ESC`` enter copy mode
@@ -59,6 +61,7 @@ In copy mode you can then use vi selection bindings (w,e,t,etc)
 * ``y`` to yank to a buffer
 * ``<prefix> p`` paste
 * ``<prefix> P`` pick what to paste when there are multiple things copied
+
 ##### System clipboard copy & paste (requires xclip)
 * ``<prefix> Ctrl+c`` Copy buffer to clipboard
 * ``<prefix> Ctrl+v`` Paste from clipboard
