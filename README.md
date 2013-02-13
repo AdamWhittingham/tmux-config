@@ -11,6 +11,7 @@ Installation
 ## Quick notes
 1. My example script for firing up tmux as a ruby dev environment is [over here](http://github.com/AdamWhittingham/pastebit/blob/master/develop.sh)
 2. If you want to share between user accounts on the same box, read the ``setup_socket_sharing.sh`` script for details
+3. I have some helpful aliases in my [.bashrc file](http://github.com/AdamWhittingham/bash-config/blob/master/bash_adam)
 
 Key bindings
 ------------
