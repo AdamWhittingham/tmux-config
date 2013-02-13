@@ -8,8 +8,9 @@ Installation
 1. ``git clone https://github.com/AdamWhittingham/tmux-config.git ~/.tmux-config``
 2. ``ln -s ~/.tmux-config/tmux.conf ~/.tmux.conf``
 
-## Quick note
-My example script for firing up tmux as a ruby dev environment is [over here](http://github.com/AdamWhittingham/pastebit/blob/master/develop.sh)
+## Quick notes
+1. My example script for firing up tmux as a ruby dev environment is [over here](http://github.com/AdamWhittingham/pastebit/blob/master/develop.sh)
+2. If you want to share between user accounts on the same box, read the ``setup_socket_sharing.sh`` script for details
 
 Key bindings
 ------------
