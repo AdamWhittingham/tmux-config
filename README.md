@@ -30,16 +30,16 @@ Key bindings
 * ``<prefix> w`` list windows and select which to switch to
 
 ### Window Control
+* ``<prefix> r`` rename window
 * ``<prefix> <`` move window left
 * ``<prefix> >`` move window right
-* ``<prefix> r`` rename window
 
-### Pane Movement
-* ``<prefix> h`` move to the pane left
-* ``<prefix> j`` move to the pane down
-* ``<prefix> k`` move to the pane up
-* ``<prefix> l`` move to the pane right
-* ``<prefix> q n`` Show pane numbers, then jump to pane n
+### Pane Focus
+* ``<prefix> h`` move focus to the pane left
+* ``<prefix> j`` move focus to the pane down
+* ``<prefix> k`` move focus to the pane up
+* ``<prefix> l`` move focus to the pane right
+* ``<prefix> q n`` Show pane numbers, then jump focus to pane n
 
 ### Pane Resizing
 *These can be repeated after a single press of the prefix to resize quickly*
@@ -48,12 +48,21 @@ Key bindings
 * ``<prefix> K`` resize to the pane up
 * ``<prefix> L`` resize to the pane right
 
+### Pane Movement
+* ``<prefix> {`` move this pane to the location of the previous pane
+* ``<prefix> }`` move this pane to the location of the next pane
+* ``<prefix> Up`` Temporarily maximise the current pane in a new window
+* ``<prefix> Down`` Minimise the maximised pane back where it came from
+
+### Pane Control
+* ``<prefix> x`` close pane
+* ``<prefix> q`` Kill the pane (kills everything the pane is running, careful!)
+* ``<prefix> !`` turn pane into window
+
 ### Session Control
 * ``<prefix> d`` detach from session
 * ``tmux attach -t <session-name>`` reattach to session
 * ``tmux ls`` list sessions
-* ``<prefix> q`` Kill the pane
-* ``<prefix> Ctrl+q`` Kill the whole session- use with care!
 
 ### Copy & Paste
 * ``<prefix> ESC`` enter copy mode
@@ -67,8 +76,12 @@ In copy mode you can then use vi selection bindings (w,e,t,etc)
 * ``<prefix> Ctrl+c`` Copy buffer to clipboard
 * ``<prefix> Ctrl+v`` Paste from clipboard
 
+### Advanced Session Control
+* ``<prefix> (`` switch into the next tmux session
+* ``<prefix> )`` switch into the previous tmux session
+* ``<prefix> Ctrl+q`` Kill the whole session- use with care!
+
 ### Misc
-* ``<prefix> x`` close pane
 * ``<prefix><prefix>`` send the prefix through tmux to the terminal or app inside
-* ``Shift + Left Click`` highlight text for copying
+* ``Shift + Left Click`` highlight text for copying with the mouse
 * ``<prefix> R`` reload the ~/.tmux.conf config file
