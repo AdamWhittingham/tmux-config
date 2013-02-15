@@ -85,5 +85,5 @@ In copy mode you can then use vi selection bindings (w,e,t,etc)
 ### Misc
 * ``<prefix><prefix>`` send the prefix through tmux to the terminal or app inside
 * ``Shift + Left Click`` highlight text for copying with the mouse
-* ``<prefix> r`` toggle recording the pane to a file in your home directory
+* ``<prefix> Ctrl+r`` toggle recording the pane to a file in your home directory
 * ``<prefix> R`` reload the ~/.tmux.conf config file
