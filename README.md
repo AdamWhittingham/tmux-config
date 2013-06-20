@@ -15,7 +15,7 @@ Installation
 
 Key bindings
 ------------
-``Ctrl+a`` Command prefix (``<prefix>`` from here on)
+`` ` `` Command prefix (``<prefix>`` from here on)
 
 ### Mutliplexing
 * ``<prefix> c`` Create new window
