@@ -57,7 +57,7 @@ Key bindings
 
 ### Pane Control
 * ``<prefix> x`` close pane
-* ``<prefix> q`` Kill the pane (kills everything the pane is running, careful!)
+* ``<prefix> Q`` Kill the pane (kills everything the pane is running, careful!)
 * ``<prefix> !`` turn pane into window
 
 ### Session Control
@@ -80,7 +80,7 @@ In copy mode you can then use vi selection bindings (w,e,t,etc)
 ### Advanced Session Control
 * ``<prefix> (`` switch into the next tmux session
 * ``<prefix> )`` switch into the previous tmux session
-* ``<prefix> Ctrl+q`` Kill the whole session- use with care!
+* ``<prefix> Ctrl+Q`` Kill the whole session- use with care!
 
 ### Misc
 * ``<prefix><prefix>`` send the prefix through tmux to the terminal or app inside
