@@ -59,6 +59,7 @@ Key bindings
 * ``<prefix> x`` close pane
 * ``<prefix> Q`` Kill the pane (kills everything the pane is running, careful!)
 * ``<prefix> !`` turn pane into window
+# ``<prefix> y`` toggle synchronizing keystrokes to all panes
 
 ### Session Control
 * ``<prefix> d`` detach from session
