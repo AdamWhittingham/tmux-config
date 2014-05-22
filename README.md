@@ -6,8 +6,8 @@ awesome for development and server ops without going too far.
 Installation
 ------------
 ```
-git clone https://github.com/AdamWhittingham/tmux-config.git ~/.tmux-config``
-ln -s ~/.tmux-config/tmux.conf ~/.tmux.conf``
+git clone https://github.com/AdamWhittingham/tmux-config.git ~/.tmux-config
+ln -s ~/.tmux-config/tmux.conf ~/.tmux.conf
 ```
 
 ## Quick notes
