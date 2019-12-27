@@ -78,12 +78,16 @@ battery_level(){
 ###############################
 
 TMUX=false
+EMOJI=false
 
 while [[ $# -gt 0 ]]; do
   key="$1"
   case $key in
     -t)
       TMUX=true
+      ;;
+    -e)
+      EMOJI=true
       ;;
   esac
   shift
@@ -104,12 +108,6 @@ if [[ ! $BATT_PERCENT ]]; then
   exit 1
 fi
 
-if [[ $BATT_STATUS == 0 ]] ; then
-  BATT_ICON=''
-else
-  BATT_ICON='⚡ '
-fi
-
 if $TMUX; then
   var=tmux_colours_$LEVEL
   reset="#[fg=default,bg=default]"
@@ -119,4 +117,12 @@ else
 fi
 colour=${!var}
 
-echo -e "${BATT_ICON} ${colour}${GRAPH[$LEVEL]} ${BATT_PERCENT}%${reset}"
+if [[ $BATT_STATUS == 0 ]] ; then
+  BATT_ICON=''
+elif $EMOJI; then
+  BATT_ICON='⚡'
+else
+  BATT_ICON='↯'
+fi
+
+echo -e "${colour}${BATT_ICON} ${GRAPH[$LEVEL]} ${BATT_PERCENT}%${reset}"
