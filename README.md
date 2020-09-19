@@ -1,7 +1,11 @@
-Adam's tmux setup
+Ad's tmux setup
 =================
-Keybindings, status bar and some misc. behavioural changes to make tmux more
-awesome for development and server ops without going too far.
+
+Keybindings, status bar and some minor changes to make tmux more
+awesome for development and ops without going too far.
+
+![Screenshot](screenshot.png)
+
 
 Installation
 ------------
@@ -46,6 +50,7 @@ Key bindings
 
 ### Pane Resizing
 *These can be repeated after a single press of the prefix to resize quickly*
+
 * ``<prefix> H`` resize to the pane left
 * ``<prefix> J`` resize to the pane down
 * ``<prefix> K`` resize to the pane up
@@ -61,9 +66,9 @@ Key bindings
 * ``<prefix> x`` close pane
 * ``<prefix> Q`` Kill the pane (kills everything the pane is running, careful!)
 * ``<prefix> !`` turn pane into window
-# ``<prefix> y`` toggle synchronizing keystrokes to all panes
-# ``<prefix> m`` to send this pane to another window
-# ``<prefix> M`` to pull a pane in from another window
+* ``<prefix> y`` toggle synchronizing keystrokes to all panes
+* ``<prefix> m`` to send this pane to another window
+* ``<prefix> M`` to pull a pane in from another window
 
 ### Session Control
 * ``<prefix> d`` detach from session
