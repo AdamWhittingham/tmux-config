@@ -78,16 +78,12 @@ battery_level(){
 ###############################
 
 TMUX=false
-EMOJI=false
 
 while [[ $# -gt 0 ]]; do
   key="$1"
   case $key in
     -t)
       TMUX=true
-      ;;
-    -e)
-      EMOJI=true
       ;;
   esac
   shift
@@ -118,11 +114,9 @@ fi
 colour=${!var}
 
 if [[ $BATT_STATUS == 0 ]] ; then
-  BATT_ICON=''
-elif $EMOJI; then
-  BATT_ICON='⚡'
+  BATT_ICON="${GRAPH[$LEVEL]}"
 else
   BATT_ICON='↯'
 fi
 
-echo -e "${colour}${BATT_ICON} ${GRAPH[$LEVEL]} ${BATT_PERCENT}%${reset}"
+echo -e "${colour}${BATT_ICON} ${BATT_PERCENT}%${reset}"
