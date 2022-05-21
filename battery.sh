@@ -1,6 +1,7 @@
 #!/bin/bash
 
 GRAPH=( ! ▁ ▂ ▃ ▄ ▅ ▆ ▇ █ )
+NERD_GRAPH=(          )
 
 shell_colours_0="\033[31m"
 shell_colours_1="\033[31m"
@@ -113,10 +114,12 @@ else
 fi
 colour=${!var}
 
-if [[ $BATT_STATUS == 0 ]] ; then
-  BATT_ICON="${GRAPH[$LEVEL]}"
-else
+if [[ $BATT_STATUS == 1 ]] ; then
   BATT_ICON='↯'
+elif [[ $NERDFONT ]]; then
+  BATT_ICON="${NERD_GRAPH[$LEVEL]}"
+else
+  BATT_ICON="${GRAPH[$LEVEL]}"
 fi
 
 echo -e "${colour}${BATT_ICON} ${BATT_PERCENT}%${reset}"
