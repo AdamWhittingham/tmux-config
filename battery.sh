@@ -1,27 +1,44 @@
 #!/bin/bash
 
 GRAPH=( ! ▁ ▂ ▃ ▄ ▅ ▆ ▇ █ )
-NERD_GRAPH=(          )
+NERD_GRAPH=( 󰂃 󰁺 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰁹 )
 
-shell_colours_0="\033[31m"
-shell_colours_1="\033[31m"
-shell_colours_2="\033[31m"
-shell_colours_3="\033[33m"
-shell_colours_4="\033[33m"
-shell_colours_5="\033[32m"
-shell_colours_6="\033[32m"
-shell_colours_7="\033[32m"
-shell_colours_8="\033[32m"
+shell_colours=(
+"31"
+"31"
+"31"
+"33"
+"33"
+"32"
+"32"
+"32"
+"32"
+)
 
-tmux_colours_0="#[fg=colour196]"
-tmux_colours_1="#[fg=colour202]"
-tmux_colours_2="#[fg=colour208]"
-tmux_colours_3="#[fg=colour214]"
-tmux_colours_4="#[fg=colour184]"
-tmux_colours_5="#[fg=colour154]"
-tmux_colours_6="#[fg=colour34]"
-tmux_colours_7="#[fg=colour76]"
-tmux_colours_8="#[fg=colour40]"
+shell_bg_colours=(
+"41"
+"41"
+"41"
+"43"
+"43"
+"42"
+"42"
+"42"
+"42"
+)
+
+
+tmux_colors=(
+"colour196"
+"colour202"
+"colour208"
+"colour214"
+"colour184"
+"colour190"
+"colour22"
+"colour28"
+"colour34"
+)
 
 osx_battery() {
   if [ "$(pmset -g batt | grep -o 'AC Power')" ]; then
@@ -79,12 +96,17 @@ battery_level(){
 ###############################
 
 TMUX=false
+COLOR_BG=false
+spacer=""
 
 while [[ $# -gt 0 ]]; do
   key="$1"
   case $key in
     -t)
       TMUX=true
+      ;;
+    -b)
+      COLOR_BG=true
       ;;
   esac
   shift
@@ -106,20 +128,27 @@ if [[ ! $BATT_PERCENT ]]; then
 fi
 
 if $TMUX; then
-  var=tmux_colours_$LEVEL
+  field="fg"
+  spacer=" "
+  if $COLOR_BG; then
+    field="bg"
+  fi
+  batt_color="#[${field}=${tmux_colors[LEVEL]}]"
   reset="#[fg=default,bg=default]"
 else
-  var=shell_colours_$LEVEL
+  batt_color="\033[${shell_colours[LEVEL]}m"
+  if $COLOR_BG; then
+    batt_color="\033[0;1;${shell_bg_colours[LEVEL]}m"
+  fi
   reset="\033[0m"
 fi
-colour=${!var}
 
 if [[ $BATT_STATUS == 1 ]] ; then
-  BATT_ICON='↯'
+  BATT_ICON='󰂄'
 elif [[ $NERDFONT ]]; then
   BATT_ICON="${NERD_GRAPH[$LEVEL]}"
 else
   BATT_ICON="${GRAPH[$LEVEL]}"
 fi
 
-echo -e "${colour}${BATT_ICON} ${BATT_PERCENT}%${reset}"
+echo -e "${batt_color}${spacer}${BATT_ICON} ${BATT_PERCENT}%${spacer}${reset}"
