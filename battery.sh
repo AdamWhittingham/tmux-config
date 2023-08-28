@@ -128,12 +128,11 @@ if [[ ! $BATT_PERCENT ]]; then
 fi
 
 if $TMUX; then
-  field="fg"
   spacer=" "
+  batt_color="#[fg=${tmux_colors[LEVEL]}]"
   if $COLOR_BG; then
-    field="bg"
+    batt_color="#[fg=color234,bg=${tmux_colors[LEVEL]}]"
   fi
-  batt_color="#[${field}=${tmux_colors[LEVEL]}]"
   reset="#[fg=default,bg=default]"
 else
   batt_color="\033[${shell_colours[LEVEL]}m"
