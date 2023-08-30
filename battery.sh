@@ -97,6 +97,8 @@ battery_level(){
 
 TMUX=false
 COLOR_BG=false
+SHOW_ICON=true
+SHOW_PERCENT=true
 spacer=""
 
 while [[ $# -gt 0 ]]; do
@@ -107,6 +109,14 @@ while [[ $# -gt 0 ]]; do
       ;;
     -b)
       COLOR_BG=true
+      ;;
+    -i)
+      SHOW_ICON=true
+      SHOW_PERCENT=false
+      ;;
+    -p)
+      SHOW_ICON=false
+      SHOW_PERCENT=true
       ;;
   esac
   shift
@@ -150,4 +160,14 @@ else
   BATT_ICON="${GRAPH[$LEVEL]}"
 fi
 
-echo -e "${batt_color}${spacer}${BATT_ICON} ${BATT_PERCENT}%${spacer}${reset}"
+icon=""
+if $SHOW_ICON; then
+  icon="${BATT_ICON}"
+fi
+
+percent=""
+if $SHOW_PERCENT; then
+  percent="${BATT_PERCENT}%"
+fi
+
+echo -e "${batt_color}${spacer}${icon} ${percent}${spacer}${reset}"
