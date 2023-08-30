@@ -1,13 +1,10 @@
 #!/bin/bash
 
 current_tty="$(echo $1 | rev | cut -d'/' -f1 | rev)"
-ssh_host=$(ps -t "$current_tty" | sed -n -e 's/^.*\(ssh\) //p' | sed -n -e 's/^.*@//p' | cut -f1 -d' ')
-mosh_host=$(ps -t "$current_tty" | sed -n -e 's/^.*\(mosh-client\) \(-# \)//p' | cut -d ' ' -f1)
+ssh_host=$(ps -t "$current_tty" -o args | grep "ssh" | cut -f2 -d' ')
 
 if [[ -n $ssh_host ]]; then
-  echo "#[fg=colour220]$ssh_host#[fg=default]"
-elif [[ -n $mosh_host ]]; then
-  echo "#[fg=colour220]$mosh_host#[fg=default]"
+  echo "#[fg=colour178]#[fg=color234,bg=colour178,bright]󰇅 $ssh_host"
 else
-	hostname -s
+  echo "#[fg=colour61]#[fg=color234,bg=colour61]󰇅 $(hostname -s)"
 fi
