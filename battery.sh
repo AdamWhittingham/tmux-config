@@ -99,6 +99,7 @@ TMUX=false
 COLOR_BG=false
 SHOW_ICON=true
 SHOW_PERCENT=true
+LIGHT_TEXT=false
 spacer=""
 
 while [[ $# -gt 0 ]]; do
@@ -118,6 +119,8 @@ while [[ $# -gt 0 ]]; do
       SHOW_ICON=false
       SHOW_PERCENT=true
       ;;
+    -l)
+      LIGHT_TEXT=true
   esac
   shift
 done
@@ -141,7 +144,11 @@ if $TMUX; then
   spacer=" "
   batt_color="#[fg=${tmux_colors[LEVEL]}]"
   if $COLOR_BG; then
-    batt_color="#[fg=color234,bg=${tmux_colors[LEVEL]}]"
+    fg="color234"
+    if $LIGHT_TEXT; then
+      fg="color254"
+    fi
+    batt_color="#[fg=${fg},bg=${tmux_colors[LEVEL]}]"
   fi
   reset="#[fg=default,bg=default]"
 else
