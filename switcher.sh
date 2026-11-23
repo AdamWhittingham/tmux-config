@@ -12,8 +12,27 @@ reset=$'\e[0m'
 
 jump_keys=(1 2 3 4 5 6 7 8 9 0 - "=")
 
+waiting_colour=$'\e[38;5;40m'
+busy_colour=$'\e[38;5;220m'
+
 current_window=$(tmux display-message -p '#{session_name}:#{window_index}')
 current_session=${current_window%%:*}
+
+# Claude Code records each running session's status and tmux pane in
+# ~/.claude/sessions/<pid>.json. Each line is "session<TAB>state", where state
+# is "waiting" if any Claude pane in the session waits for input, else "busy".
+claude_states=$(
+  while IFS=$'\t' read -r pid pane status; do
+    kill -0 "$pid" 2>/dev/null && printf '%s\t%s\n' "$pane" "$status"
+  done < <(jq -r '[.pid, (.tmux // "" | split(".") | last), .status] | @tsv' ~/.claude/sessions/*.json 2>/dev/null) |
+    awk -F'\t' '
+      NR == FNR { session[$1] = $2; next }
+      !($1 in session) { next }
+      $2 == "busy" || $2 == "shell" { if (state[session[$1]] != "waiting") state[session[$1]] = "busy"; next }
+      { state[session[$1]] = "waiting" }
+      END { for (s in state) print s "\t" state[s] }
+    ' <(tmux list-panes -a -F '#{pane_id}	#{session_name}') -
+)
 
 # Each line is "target<TAB>label<TAB>jump key", fzf only shows the label
 list_targets() {
@@ -24,7 +43,12 @@ list_targets() {
       session=$sess
       local colour=$session_colour
       [[ $sess == "$current_session" ]] && colour=$current_colour
-      printf '%s\t%s%s%s\t\n' "$sess" "$colour$bold" "$sess" "$reset"
+      local dot=""
+      case $(awk -F'\t' -v s="$sess" '$1 == s { print $2 }' <<<"$claude_states") in
+        waiting) dot=" ${waiting_colour}●${reset}" ;;
+        busy) dot=" ${busy_colour}●${reset}" ;;
+      esac
+      printf '%s\t%s%s%s%s\t\n' "$sess" "$colour$bold" "$sess" "$reset" "$dot"
     fi
 
     local target="$sess:$win"
