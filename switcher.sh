@@ -49,7 +49,7 @@ list_targets() {
     local target="$sess:$win"
     local dot=" "
     if [[ $target == "$current_window" ]]; then
-      dot="${current_colour}●${reset}"
+      dot="${current_colour}▶${reset}"
     else
       case $(awk -F'\t' -v t="$target" '$1 == t { print $2 }' <<<"$claude_states") in
         waiting) dot="${waiting_colour}●${reset}" ;;
