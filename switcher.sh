@@ -47,19 +47,21 @@ list_targets() {
     fi
 
     local target="$sess:$win"
-    local marker=" "
-    [[ $target == "$current_window" ]] && marker="${current_colour}→${reset}"
     local dot=" "
-    case $(awk -F'\t' -v t="$target" '$1 == t { print $2 }' <<<"$claude_states") in
-      waiting) dot="${waiting_colour}●${reset}" ;;
-      busy) dot="${busy_colour}●${reset}" ;;
-    esac
+    if [[ $target == "$current_window" ]]; then
+      dot="${current_colour}●${reset}"
+    else
+      case $(awk -F'\t' -v t="$target" '$1 == t { print $2 }' <<<"$claude_states") in
+        waiting) dot="${waiting_colour}●${reset}" ;;
+        busy) dot="${busy_colour}●${reset}" ;;
+      esac
+    fi
     local detail="$cmd"
     [[ $panes -gt 1 ]] && detail="$panes panes"
     local key=${jump_keys[count]}
     count=$((count + 1))
-    printf '%s\t  %s%1s%s %s %s %-24s %s%s%s\t%s\n' \
-      "$target" "$session_colour$bold" "$key" "$reset" "$dot" "$marker" "$name" "$dim" "$detail" "$reset" "$key"
+    printf '%s\t  %s%1s%s %s %-24s %s%s%s\t%s\n' \
+      "$target" "$session_colour$bold" "$key" "$reset" "$dot" "$name" "$dim" "$detail" "$reset" "$key"
   done < <(tmux list-windows -a -F '#{session_name}	#{window_index}	#{window_name}	#{window_panes}	#{pane_current_command}')
 }
 
