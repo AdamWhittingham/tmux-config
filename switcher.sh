@@ -10,7 +10,7 @@ session_colour=$'\e[38;5;33m'
 current_colour=$'\e[38;5;205m'
 reset=$'\e[0m'
 
-jump_keys=(1 2 3 4 5 6 7 8 9 0 - =)
+jump_keys=(1 2 3 4 5 6 7 8 9 0 - "=")
 
 current_window=$(tmux display-message -p '#{session_name}:#{window_index}')
 current_session=${current_window%%:*}
