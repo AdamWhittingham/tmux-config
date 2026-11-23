@@ -58,8 +58,8 @@ list_targets() {
     [[ $panes -gt 1 ]] && detail="$panes panes"
     local key=${jump_keys[count]}
     count=$((count + 1))
-    printf '%s\t%s %s%1s%s %s %-24s %s%s%s\t%s\n' \
-      "$target" "$dot" "$session_colour$bold" "$key" "$reset" "$marker" "$name" "$dim" "$detail" "$reset" "$key"
+    printf '%s\t  %s%1s%s %s %s %-24s %s%s%s\t%s\n' \
+      "$target" "$session_colour$bold" "$key" "$reset" "$dot" "$marker" "$name" "$dim" "$detail" "$reset" "$key"
   done < <(tmux list-windows -a -F '#{session_name}	#{window_index}	#{window_name}	#{window_panes}	#{pane_current_command}')
 }
 
