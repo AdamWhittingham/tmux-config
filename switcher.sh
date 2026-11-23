@@ -19,8 +19,8 @@ current_window=$(tmux display-message -p '#{session_name}:#{window_index}')
 current_session=${current_window%%:*}
 
 # Claude Code records each running session's status and tmux pane in
-# ~/.claude/sessions/<pid>.json. Each line is "session<TAB>state", where state
-# is "waiting" if any Claude pane in the session waits for input, else "busy".
+# ~/.claude/sessions/<pid>.json. Each line is "session:window<TAB>state", where
+# state is "waiting" if any Claude pane in the window waits for input, else "busy".
 claude_states=$(
   while IFS=$'\t' read -r pid pane status; do
     kill -0 "$pid" 2>/dev/null && printf '%s\t%s\n' "$pane" "$status"
@@ -31,7 +31,7 @@ claude_states=$(
       $2 == "busy" || $2 == "shell" { if (state[session[$1]] != "waiting") state[session[$1]] = "busy"; next }
       { state[session[$1]] = "waiting" }
       END { for (s in state) print s "\t" state[s] }
-    ' <(tmux list-panes -a -F '#{pane_id}	#{session_name}') -
+    ' <(tmux list-panes -a -F '#{pane_id}	#{session_name}:#{window_index}') -
 )
 
 # Each line is "target<TAB>label<TAB>jump key", fzf only shows the label
@@ -43,23 +43,23 @@ list_targets() {
       session=$sess
       local colour=$session_colour
       [[ $sess == "$current_session" ]] && colour=$current_colour
-      local dot=""
-      case $(awk -F'\t' -v s="$sess" '$1 == s { print $2 }' <<<"$claude_states") in
-        waiting) dot=" ${waiting_colour}●${reset}" ;;
-        busy) dot=" ${busy_colour}●${reset}" ;;
-      esac
-      printf '%s\t%s%s%s%s\t\n' "$sess" "$colour$bold" "$sess" "$reset" "$dot"
+      printf '%s\t%s%s%s\t\n' "$sess" "$colour$bold" "$sess" "$reset"
     fi
 
     local target="$sess:$win"
     local marker=" "
-    [[ $target == "$current_window" ]] && marker="${current_colour}●${reset}"
+    [[ $target == "$current_window" ]] && marker="${current_colour}→${reset}"
+    local dot=" "
+    case $(awk -F'\t' -v t="$target" '$1 == t { print $2 }' <<<"$claude_states") in
+      waiting) dot="${waiting_colour}●${reset}" ;;
+      busy) dot="${busy_colour}●${reset}" ;;
+    esac
     local detail="$cmd"
     [[ $panes -gt 1 ]] && detail="$panes panes"
     local key=${jump_keys[count]}
     count=$((count + 1))
-    printf '%s\t  %s%1s%s %s %-24s %s%s%s\t%s\n' \
-      "$target" "$session_colour$bold" "$key" "$reset" "$marker" "$name" "$dim" "$detail" "$reset" "$key"
+    printf '%s\t%s %s%1s%s %s %-24s %s%s%s\t%s\n' \
+      "$target" "$dot" "$session_colour$bold" "$key" "$reset" "$marker" "$name" "$dim" "$detail" "$reset" "$key"
   done < <(tmux list-windows -a -F '#{session_name}	#{window_index}	#{window_name}	#{window_panes}	#{pane_current_command}')
 }
 
